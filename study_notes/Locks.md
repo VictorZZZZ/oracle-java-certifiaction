@@ -1,0 +1,25 @@
+# Locks
+[[Locks.png]]
+**Condition ![](https://habrastorage.org/r/w1560/storage2/36b/c31/fa2/36bc31fa2bdf7a08f3a85dff79ee4eef.png) ![](https://habrastorage.org/r/w1560/storage2/d73/4a3/deb/d734a3deb05965b8207c68b307cadba8.png)** — Интерфейс, который описывает альтернативные методы стандарным wait/notify/notifyAll. Объект с условием чаще всего получается из локов через метод lock.newCondition(). Тем самым можно получить несколько комплектов wait/notify для одного объекта.  
+  
+**Lock ![](https://habrastorage.org/r/w1560/storage2/36b/c31/fa2/36bc31fa2bdf7a08f3a85dff79ee4eef.png) ![](https://habrastorage.org/r/w1560/storage2/d73/4a3/deb/d734a3deb05965b8207c68b307cadba8.png)** — Базовый интерфейс из lock framework, предоставляющий более гибкий подход по ограничению доступа к ресурсам/блокам нежели при использовании synchronized. Так, при использовании нескольких локов, порядок их освобождения может быть произвольный. Плюс имеется возможность пойти по альтернативному сценарию, если лок уже кем то захвачен.  
+  
+**ReentrantLock ![](https://habrastorage.org/r/w1560/storage2/0fb/43e/259/0fb43e259847760ecf54027457005e30.png) ![](https://habrastorage.org/r/w1560/storage2/d73/4a3/deb/d734a3deb05965b8207c68b307cadba8.png)** — Лок на вхождение. Только один поток может зайти в защищенный блок. Класс поддерживает «честную» (fair) и «нечестную» (non-fair) разблокировку потоков. При «честной» разблокировке соблюдается порядок освобождения потоков, вызывающих lock(). При «нечестной» разблокировке порядок освобождения потоков не гарантируется, но, как бонус, такая разблокировка работает быстрее. По умолчанию, используется «нечестная» разблокировка.  
+  
+**ReadWriteLock ![](https://habrastorage.org/r/w1560/storage2/36b/c31/fa2/36bc31fa2bdf7a08f3a85dff79ee4eef.png) ![](https://habrastorage.org/r/w1560/storage2/d73/4a3/deb/d734a3deb05965b8207c68b307cadba8.png)** — Дополнительный интерфейс для создания read/write локов. Такие локи необычайно полезны, когда в системе много операций чтения и мало операций записи.  
+  
+**ReentrantReadWriteLock ![](https://habrastorage.org/r/w1560/storage2/0fb/43e/259/0fb43e259847760ecf54027457005e30.png) ![](https://habrastorage.org/r/w1560/storage2/d73/4a3/deb/d734a3deb05965b8207c68b307cadba8.png)** — Очень часто используется в многопоточных сервисах и кешах, показывая очень хороший прирост производительности по сравнению с блоками synchronized. По сути, класс работает в 2-х взаимоисключающих режимах: много reader'ов читают данные в параллель и когда только 1 writer пишет данные.  
+  
+**ReentrantReadWriteLock.ReadLock ![](https://habrastorage.org/r/w1560/storage2/0fb/43e/259/0fb43e259847760ecf54027457005e30.png) ![](https://habrastorage.org/r/w1560/storage2/d73/4a3/deb/d734a3deb05965b8207c68b307cadba8.png)** — Read lock для reader'ов, получаемый через readWriteLock.readLock().  
+  
+**ReentrantReadWriteLock.WriteLock ![](https://habrastorage.org/r/w1560/storage2/0fb/43e/259/0fb43e259847760ecf54027457005e30.png) ![](https://habrastorage.org/r/w1560/storage2/d73/4a3/deb/d734a3deb05965b8207c68b307cadba8.png)** — Write lock для writer'ов, получаемый через readWriteLock.writeLock().  
+  
+**LockSupport ![](https://habrastorage.org/r/w1560/storage2/0fb/43e/259/0fb43e259847760ecf54027457005e30.png) ![](https://habrastorage.org/r/w1560/storage2/d73/4a3/deb/d734a3deb05965b8207c68b307cadba8.png)** — Предназначен для построения классов с локами. Содержит методы для парковки потоков вместо устаревших методов Thread.suspend() и Thread.resume().  
+  
+![](https://habrastorage.org/r/w1560/storage2/928/8f8/e77/9288f8e777b62ff96c4c953471e27f60.png)  
+  
+**AbstractOwnableSynchronizer ![](https://habrastorage.org/r/w1560/storage2/0fb/43e/259/0fb43e259847760ecf54027457005e30.png) ![](https://habrastorage.org/r/w1560/storage2/c29/5ad/47f/c295ad47f86291abd7e8fe2b91b9621c.png)** — Базовый класс для построения механизмов сихнронизации. Содержит всего одну пару геттер/сеттер для запоминания и чтения эксклюзивного потока, который может работать с данными.  
+  
+**AbstractQueuedSynchronizer ![](https://habrastorage.org/r/w1560/storage2/0fb/43e/259/0fb43e259847760ecf54027457005e30.png) ![](https://habrastorage.org/r/w1560/storage2/d73/4a3/deb/d734a3deb05965b8207c68b307cadba8.png)** — Используется в качестве базового класса для механизма синхронизации в FutureTask, CountDownLatch, Semaphore, ReentrantLock, ReentrantReadWriteLock. Может применяться при создании новых механизмов синхронизации, полагающихся на одиночное и атомарное значение int.  
+  
+**AbstractQueuedLongSynchronizer ![](https://habrastorage.org/r/w1560/storage2/0fb/43e/259/0fb43e259847760ecf54027457005e30.png) ![](https://habrastorage.org/r/w1560/storage2/c29/5ad/47f/c295ad47f86291abd7e8fe2b91b9621c.png)** — Разновидность AbstractQueuedSynchronizer, которая поддерживает атомарное значение long.
