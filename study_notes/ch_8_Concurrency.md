@@ -200,3 +200,17 @@ C  `synchronized(this)` блок кода будет защищён для ин�
 
 `synchronized(X.class)` is used to make sure that there is exactly one Thread in the block. `synchronized(this)` ensures that there is exactly one thread per instance. If this makes the actual code in the block thread-safe depends on the implementation. If mutate only state of the instance `synchronized(this)` is enough
 
+# Конспект по Java SE 11
+- [Часть 1. Типы данных](ch_1_DataTypes.md)
+- [Часть 2. Program Flow. Loops](ch_2_Program_flow.md)
+- [Часть 3. ООП](ch_3_Oop.md)
+- [Часть 4. Исключения](ch_4_Exceptions.md)
+- [Часть 5. Arrays](ch_5_Arrays.md)
+- [Часть 6. Streams](ch_6_Streams.md)
+- [Часть 7. Модульность](ch_7_Modularity.md)
+- [Часть 8. Concurrency](ch_8_Concurrency.md)
+- [Часть 9. IO](ch_9_IO.md)
+- [Часть 10. Secure coding](ch_10_Secure_coding.md)
+- [Часть 11. JDBC](ch_11_JDBC.md)
+- [Часть 12. Локализации](ch_12_Localization.md)
+- [Часть 13. Аннотации](ch_13_Annotations.md)
